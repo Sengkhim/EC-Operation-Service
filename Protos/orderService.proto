@@ -1,0 +1,20 @@
+﻿
+syntax = "proto3";
+
+option csharp_namespace = "EcommerceServiceOperation";
+
+package orderService;
+
+service OrderService {
+  rpc Order (OrderRequest) returns (OrderResponse);
+}
+
+message OrderRequest {
+  string item = 2;
+}
+
+message OrderResponse {
+  int32 id = 1;
+  string item = 2;
+  string dateTime = 3;
+}

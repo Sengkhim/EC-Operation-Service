@@ -1,0 +1,23 @@
+﻿
+syntax = "proto3";
+
+option csharp_namespace = "EcommerceServiceOperation";
+
+package paymentService;
+
+service PaymentService {
+  rpc Payment (PaymentRequest) returns (PaymentResponse);
+}
+
+message PaymentRequest {
+  string account = 1;
+  double balance = 2;
+}
+
+message PaymentResponse {
+  string id = 1;
+  string account = 2;
+  double balance = 3;
+  string referenceNo = 4;
+  string dateTime = 5;
+}
