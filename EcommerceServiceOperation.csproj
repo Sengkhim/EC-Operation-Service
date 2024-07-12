@@ -11,14 +11,18 @@
         <Protobuf Include="Protos\greet.proto" GrpcServices="Server"/>
         <Protobuf Include="Protos\orderService.proto" GrpcServices="Server"/>
         <Protobuf Include="Protos\paymentService.proto" GrpcServices="Server"/>
+        <Protobuf Include="Protos\categoryService.proto" GrpcServices="Server"/>
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="13.0.1" />
         <PackageReference Include="Grpc.AspNetCore" Version="2.57.0"/>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Data\" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
     </ItemGroup>
 
 </Project>
