@@ -2,15 +2,13 @@
 
 namespace EcommerceServiceOperation.Infrastructure.Entities;
 
-public class Category : BaseEntity<string>, ICloneable, ICode
+public class Category : BaseEntity<string>, ICode
 {
     public required string Name { get; init; }
-    
-    public required string? Code { get; set; }
+
+    public string? Code { get; set; } = string.Empty;
     
     public required bool Status { get; init; }
-
-    public object Clone() => this;
 
     public Product? Product { get; init; }
 }

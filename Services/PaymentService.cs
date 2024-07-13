@@ -2,9 +2,9 @@
 
 namespace EcommerceServiceOperation.Services;
 
-public class PaymentServiceImpl(ILogger<PaymentServiceImpl> logger) : PaymentService.PaymentServiceBase
+public class PaymentService(ILogger<PaymentService> logger): PaymentGRPC.PaymentGRPCBase 
 {
-    public override Task<PaymentResponse> Payment(PaymentRequest request, ServerCallContext context)
+    public override Task<PaymentResponse> Create(PaymentRequest request, ServerCallContext context)
     {
         var response = Task.FromResult(new PaymentResponse
         {

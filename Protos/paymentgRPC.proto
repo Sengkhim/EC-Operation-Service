@@ -3,10 +3,10 @@ syntax = "proto3";
 
 option csharp_namespace = "EcommerceServiceOperation";
 
-package paymentService;
+package paymentGRPC;
 
-service PaymentService {
-  rpc Payment (PaymentRequest) returns (PaymentResponse);
+service PaymentGRPC {
+  rpc Create (PaymentRequest) returns (PaymentResponse);
 }
 
 message PaymentRequest {

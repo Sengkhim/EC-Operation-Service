@@ -8,10 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protos\greet.proto" GrpcServices="Server"/>
-        <Protobuf Include="Protos\orderService.proto" GrpcServices="Server"/>
-        <Protobuf Include="Protos\paymentService.proto" GrpcServices="Server"/>
-        <Protobuf Include="Protos\categoryService.proto" GrpcServices="Server"/>
+        <Protobuf Include="Protos\ordergRPC.proto" GrpcServices="Server" />
+        <Protobuf Include="Protos\paymentgRPC.proto" GrpcServices="Server" />
+        <Protobuf Include="Protos\categorygRPC.proto" GrpcServices="Server" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,22 +1,62 @@
-﻿using EcommerceServiceOperation.Infrastructure.Services;
+﻿using EcommerceServiceOperation.Data;
+using EcommerceServiceOperation.Infrastructure.Entities;
 using Grpc.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceServiceOperation.Services;
 
-public class CategoryServiceImpl(ICategoryService service, ILogger<CategoryServiceImpl> logger)
-    : CategoryService.CategoryServiceBase
+public class CategoryService(IEcDataContext ecDataContext, ILogger<CategoryService> logger)
+    : CategoryGRPC.CategoryGRPCBase
 {
+  
+    private readonly Random _random = new ();
+    
     public override async Task<CategoryResponse> Create(CategoryRequest request, ServerCallContext context)
     {
-        await service.CreateAsync(request);
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        
+        var code = new string(Enumerable.Repeat(chars, 5)
+            .Select(s => s[_random.Next(s.Length)]).ToArray());
+        
+        var identity = Guid.NewGuid().ToString();
+        
+        await ecDataContext.Set<Category>().AddAsync(new Category
+        {
+            Id = Guid.NewGuid().ToString(),
+            Name = request.Name,
+            Status = true,
+            Code = code
+        });
 
-        logger.LogInformation($"Request from {context.Host} is sucessful");
+        await ecDataContext.SaveChangesAsync();
+        
+        logger.LogInformation($"Request from {context.Host} is successful");
         
         return await Task.FromResult(new CategoryResponse
         {
-            Id = Guid.NewGuid().ToString(),
-            Code = "CT-102",
+            Id = identity,
+            Code = code,
             Status = true
         });
+    }
+
+    public override async Task<CategoryResponses> GetAll(GetAllRequest request, ServerCallContext context)
+    {
+        var query = await ecDataContext.Set<Category>()
+            .Select(e => new CategoryResponse
+            {
+                Id = e.Id,
+                Code = e.Code,
+                Name = e.Name,
+                Status = e.Status
+            }).ToListAsync();
+
+        var response = new CategoryResponses();
+        
+        logger.LogInformation($"Request from {context.Host} is successful, {query}");
+        
+        response.Response.AddRange(query);
+        
+        return await Task.FromResult(response);
     }
 }

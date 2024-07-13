@@ -3,11 +3,13 @@ syntax = "proto3";
 
 option csharp_namespace = "EcommerceServiceOperation";
 
-package categoryService;
+package categoryGRPC;
 
-service CategoryService {
+service CategoryGRPC {
   
   rpc Create (CategoryRequest) returns (CategoryResponse);
+
+  rpc GetAll (GetAllRequest) returns (CategoryResponses);
 
 }
 
@@ -16,8 +18,15 @@ message CategoryRequest {
   bool status = 2;
 }
 
+message CategoryResponses {
+  repeated CategoryResponse response = 1;
+}
+
 message CategoryResponse {
   string id = 1;
-  string code = 2;
-  bool status = 3;
+  string name = 2;
+  string code = 3;
+  bool status = 4;
 }
+
+message GetAllRequest {}

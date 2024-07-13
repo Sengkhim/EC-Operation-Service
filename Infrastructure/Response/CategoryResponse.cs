@@ -1,7 +1,9 @@
 ﻿namespace EcommerceServiceOperation.Infrastructure.Response;
 
-public record CategoryResponse
+public record CeCategoryResponse
 {
+    public required  string Id { get; set; }
+    
     public required string Name { get; init; }
     
     public required string Code { get; set; }

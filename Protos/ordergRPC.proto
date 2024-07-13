@@ -3,10 +3,10 @@ syntax = "proto3";
 
 option csharp_namespace = "EcommerceServiceOperation";
 
-package orderService;
+package orderGRPC;
 
-service OrderService {
-  rpc Order (OrderRequest) returns (OrderResponse);
+service OrderGRPC {
+  rpc Create (OrderRequest) returns (OrderResponse);
 }
 
 message OrderRequest {

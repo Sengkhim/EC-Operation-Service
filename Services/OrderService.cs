@@ -2,9 +2,9 @@
 
 namespace EcommerceServiceOperation.Services;
 
-public class OrderServiceImpl(ILogger<OrderServiceImpl> logger) : OrderService.OrderServiceBase
+public class OrderService(ILogger<OrderService> logger)  : OrderGRPC.OrderGRPCBase
 {
-    public override Task<OrderResponse> Order(OrderRequest request, ServerCallContext context)
+    public override Task<OrderResponse> Create(OrderRequest request, ServerCallContext context)
     {
         var response = Task.FromResult(new OrderResponse
         {
